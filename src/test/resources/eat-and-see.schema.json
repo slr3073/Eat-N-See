@@ -1,0 +1,276 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/webx/eat-and-see.schema.json",
+  "type": "object",
+  "title": "The root schema",
+  "description": "JSON Schema pour le projet MAAR 2022.",
+  "required": [
+    "success"
+  ],
+  "default": {},
+  "examples": [
+    {
+      "success": true,
+      "client_ip": "141.115.5.12",
+      "country_alpha2": "FR",
+      "random_area": false,
+      "recipe": {
+        "area": "French",
+        "name": "Tarte Tatin",
+        "instructions": "Roll the pastry [...]",
+        "image_url": "https://www.themealdb.com/images/media/meals/ryspuw1511786688.jpg",
+        "themealdb_url": "https://www.themealdb.com/meal.php?c=52909",
+        "source_url": "https://www.bbcgoodfood.com/recipes/tarte-tatin"
+      },
+      "photos": [
+        {
+          "url": "https://live.staticflickr.com/4188/34483044672_da618b1bac.jpg",
+          "title": "Toulouse",
+          "owner": "Yoann JEZEQUEL"
+        }
+      ]
+    }
+  ],
+  "if": {
+    "properties": {
+      "success": {
+        "const": true
+      }
+    }
+  },
+  "then": {
+    "required": [
+      "client_ip",
+      "country_alpha2",
+      "random_area",
+      "recipe",
+      "photos"
+    ]
+  },
+  "else": {
+    "required": [
+      "api_failed",
+      "api_status"
+    ]
+  },
+  "properties": {
+    "success": {
+      "$id": "#/properties/success",
+      "type": "boolean",
+      "title": "The success schema",
+      "description": "true si le payload est une réponse valide.",
+      "default": true,
+      "examples": [
+        true
+      ]
+    },
+    "api_failed": {
+      "$id": "#/properties/api_failed",
+      "type": "string",
+      "title": "The api_failed schema",
+      "description": "Nom de l'API REST qui a échoué.",
+      "default": "",
+      "examples": [
+        "Flickr"
+      ]
+    },
+    "api_status": {
+      "$id": "#/properties/api_status",
+      "type": "string",
+      "title": "The api_status schema",
+      "description": "Code de retour HTTP de l'API REST qui a échoué.",
+      "default": "",
+      "examples": [
+        "404"
+      ]
+    },
+    "client_ip": {
+      "$id": "#/properties/client_ip",
+      "type": "string",
+      "title": "The client_ip schema",
+      "description": "Adresse IP du client.",
+      "default": "",
+      "examples": [
+        "141.115.5.12"
+      ]
+    },
+    "country_alpha2": {
+      "$id": "#/properties/country_alpha2",
+      "type": "string",
+      "title": "The country_alpha2 schema",
+      "description": "Code ISO 3166-1 alpha-2 du Pays choisi.",
+      "default": "",
+      "examples": [
+        "FR"
+      ]
+    },
+    "random_area": {
+      "$id": "#/properties/random_area",
+      "type": "boolean",
+      "title": "The random_area schema",
+      "description": "true si le Pays choisi n'a pas de recette typique référencée.",
+      "default": false,
+      "examples": [
+        false
+      ]
+    },
+    "recipe": {
+      "$id": "#/properties/recipe",
+      "type": "object",
+      "title": "The recipe schema",
+      "description": "Informations sur une recette (choisie aléatoirement).",
+      "default": {},
+      "examples": [
+        {
+          "area": "French",
+          "name": "Tarte Tatin",
+          "instructions": "Roll the pastry [...]",
+          "image_url": "https://www.themealdb.com/images/media/meals/ryspuw1511786688.jpg",
+          "themealdb_url": "https://www.themealdb.com/meal.php?c=52909",
+          "source_url": "https://www.bbcgoodfood.com/recipes/tarte-tatin"
+        }
+      ],
+      "required": [
+        "area",
+        "name",
+        "instructions",
+        "themealdb_url"
+      ],
+      "properties": {
+        "area": {
+          "$id": "#/properties/recipe/properties/area",
+          "type": "string",
+          "title": "The area schema",
+          "description": "Adjectif désignant la région associée à la recette.",
+          "default": "Unknown",
+          "examples": [
+            "French"
+          ]
+        },
+        "name": {
+          "$id": "#/properties/recipe/properties/name",
+          "type": "string",
+          "title": "The name schema",
+          "description": "Nom de la recette.",
+          "default": "",
+          "examples": [
+            "Tarte Tatin"
+          ]
+        },
+        "instructions": {
+          "$id": "#/properties/recipe/properties/instructions",
+          "type": "string",
+          "title": "The instructions schema",
+          "description": "La recette proprement dite, en anglais.",
+          "default": "",
+          "examples": [
+            "Roll the pastry [...]"
+          ]
+        },
+        "image_url": {
+          "$id": "#/properties/recipe/properties/image_url",
+          "type": "string",
+          "title": "The image_url schema",
+          "description": "URL d'une photo du plat.",
+          "default": "",
+          "examples": [
+            "https://www.themealdb.com/images/media/meals/ryspuw1511786688.jpg"
+          ]
+        },
+        "themealdb_url": {
+          "$id": "#/properties/recipe/properties/themealdb_url",
+          "type": "string",
+          "title": "The themealdb_url schema",
+          "description": "URL de la recette sur la page officielle de TheMealDB.",
+          "default": "",
+          "examples": [
+            "https://www.themealdb.com/meal.php?c=52909"
+          ]
+        },
+        "source_url": {
+          "$id": "#/properties/recipe/properties/source_url",
+          "type": "string",
+          "title": "The source_url schema",
+          "description": "URL de la page source décrivant la recette.",
+          "default": "",
+          "examples": [
+            "https://www.bbcgoodfood.com/recipes/tarte-tatin"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "photos": {
+      "$id": "#/properties/photos",
+      "type": "array",
+      "title": "The photos schema",
+      "description": "Liste de (0 à) 5 photos.",
+      "minItems": 0,
+      "maxItems": 5,
+      "default": [],
+      "examples": [
+        [
+          {
+            "url": "https://live.staticflickr.com/4188/34483044672_da618b1bac.jpg",
+            "title": "Toulouse",
+            "owner": "Yoann JEZEQUEL"
+          }
+        ]
+      ],
+      "additionalItems": true,
+      "items": {
+        "$id": "#/properties/photos/items",
+        "type": "object",
+        "title": "The Items Schema",
+        "description": "Photos en ligne.",
+        "default": {},
+        "examples": [
+          {
+            "url": "https://live.staticflickr.com/4188/34483044672_da618b1bac.jpg",
+            "title": "Toulouse",
+            "owner": "Yoann JEZEQUEL"
+          }
+        ],
+        "required": [
+          "url",
+          "title",
+          "owner"
+        ],
+        "properties": {
+          "url": {
+            "$id": "#/properties/photos/items/properties/url",
+            "type": "string",
+            "title": "The url schema",
+            "description": "URL de la photo.",
+            "default": "",
+            "examples": [
+              "https://live.staticflickr.com/4188/34483044672_da618b1bac.jpg"
+            ]
+          },
+          "title": {
+            "$id": "#/properties/photos/items/properties/title",
+            "type": "string",
+            "title": "The title schema",
+            "description": "Titre de la photo.",
+            "default": "",
+            "examples": [
+              "Toulouse"
+            ]
+          },
+          "owner": {
+            "$id": "#/properties/photos/items/properties/owner",
+            "type": "string",
+            "title": "The owner schema",
+            "description": "Auteur de la photo.",
+            "default": "",
+            "examples": [
+              "Yoann JEZEQUEL"
+            ]
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}
